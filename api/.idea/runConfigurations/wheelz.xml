@@ -1,0 +1,14 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="wheelz" type="Application" factoryName="Application">
+    <envs>
+      <env name="db_name" value="root" />
+      <env name="db_url" value="jdbc:mysql://localhost:3306/wheelz" />
+      <env name="db_password" value="12345" />
+    </envs>
+    <option name="MAIN_CLASS_NAME" value="com.wheelz.api.ApiApplication" />
+    <module name="api" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
