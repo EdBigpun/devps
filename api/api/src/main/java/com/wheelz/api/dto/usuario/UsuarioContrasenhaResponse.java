@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UsuarioContraseñaResponse {
+public class UsuarioContrasenhaResponse {
     private Long id;
     private String nombre;
     private String apellido;

@@ -1,6 +1,6 @@
 package com.wheelz.api.service.usuario;
 
-import com.wheelz.api.dto.usuario.UsuarioContraseñaResponse;
+import com.wheelz.api.dto.usuario.UsuarioContrasenhaResponse;
 import com.wheelz.api.dto.usuario.UsuarioResponse;
 import com.wheelz.api.dto.usuario.UsuarioSavingRequest;
 import com.wheelz.api.entity.usuario.Usuario;
@@ -24,11 +24,11 @@ public class UsuarioMapper {
                 .build();
     }
 
-    public UsuarioContraseñaResponse toUsuarioConContrasenaResponse(Usuario usuario) {
+    public UsuarioContrasenhaResponse toUsuarioConContrasenaResponse(Usuario usuario) {
         if (usuario == null) {
             throw new RequestException("Usuario no puede ser nulo!");
         }
-        return UsuarioContraseñaResponse.builder()
+        return UsuarioContrasenhaResponse.builder()
                 .id(usuario.getId())
                 .nombre(usuario.getNombre())
                 .apellido(usuario.getApellido())

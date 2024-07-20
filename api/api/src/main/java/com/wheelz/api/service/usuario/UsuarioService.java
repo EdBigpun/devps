@@ -46,7 +46,7 @@ public class UsuarioService {
                 .orElseThrow(() -> new RequestException("Usuario no encontrado.!"));
     }
 
-    public UsuarioContraseñaResponse findUsuarioConContraseñaId(Long id) {
+    public UsuarioContrasenhaResponse findUsuarioConContrasenhaId(Long id) {
         if (id == null || id == 0) {
             throw new RequestException("Id invalido!!!");
         }
