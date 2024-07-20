@@ -47,7 +47,7 @@ public class UsuarioController {
     }
     @GetMapping("/{id}")
     public ResponseEntity<?> getUsuarioPorId(@PathVariable Long id){
-        return ResponseEntity.ok(usuarioService.findByUsuarioId(id));
+        return ResponseEntity.ok(usuarioService.findUsuarioConContraseñaId(id));
     }
     @PostMapping
     public ResponseEntity<?> saveUsuario(@Valid @RequestBody UsuarioSavingRequest usuario, BindingResult result){

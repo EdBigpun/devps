@@ -10,13 +10,13 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UsuarioResponse {
+public class UsuarioContraseñaResponse {
     private Long id;
     private String nombre;
     private String apellido;
     private String email;
+    private String contraseña;
     private long documento;
     private TipoUsuario tipoUsuario;
     private boolean active;
-
 }

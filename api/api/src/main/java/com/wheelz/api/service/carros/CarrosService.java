@@ -42,6 +42,12 @@ public class CarrosService {
         Carros carros = carrosRepository.findById(id).orElseThrow(() -> new RequestException("Usuario no encontrado.!"));
         return carrosMapper.toCarrosResponseDTO(carros);
     }
+    public List<Carros> buscarCarrosPorMarca(String marcaBuscada) {
+        return carrosRepository.buscarPorMarca(marcaBuscada);
+    }
+    public List<Carros> buscarCarrosPorModelo(String modeloBuscado) {
+        return carrosRepository.buscarPorModelo(modeloBuscado);
+    }
     public CarrosResponseDTO saveCarros(CarrosSavingRequestDTO carrosSavingRequestDTO) {
         verificarDatosRepetidos(carrosSavingRequestDTO);
         Carros carro = carrosMapper.carrosRequestToPost(carrosSavingRequestDTO);

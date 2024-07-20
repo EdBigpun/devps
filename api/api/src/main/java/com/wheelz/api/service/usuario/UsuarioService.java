@@ -1,9 +1,6 @@
 package com.wheelz.api.service.usuario;
 
-import com.wheelz.api.dto.usuario.LoginRequestDTO;
-import com.wheelz.api.dto.usuario.UsuarioResponse;
-import com.wheelz.api.dto.usuario.UsuarioSavingRequest;
-import com.wheelz.api.dto.usuario.UsuarioUpdateRequest;
+import com.wheelz.api.dto.usuario.*;
 import com.wheelz.api.entity.usuario.Usuario;
 import com.wheelz.api.exception.RequestException;
 import com.wheelz.api.repository.UsuarioRepository;
@@ -48,12 +45,12 @@ public class UsuarioService {
         return usuarioRepository.findById(id)
                 .orElseThrow(() -> new RequestException("Usuario no encontrado.!"));
     }
-    public UsuarioResponse findByUsuarioId(Long id) {
+    public UsuarioContraseñaResponse findUsuarioConContraseñaId(Long id) {
         if (id == null|| id == 0){
             throw new RequestException("Id invalido!!!");
         }
         Usuario usuario = usuarioRepository.findById(id).orElseThrow(() -> new RequestException("Usuario no encontrado.!"));
-        return usuarioMapper.toUsuarioResponse(usuario);
+        return usuarioMapper.toUsuarioConContrasenaResponse(usuario);
     }
 
     public UsuarioResponse save(UsuarioSavingRequest usuarioSavingRequest) {
@@ -128,5 +125,4 @@ public class UsuarioService {
         usuario.setActive(false);
         usuarioRepository.save(usuario);
     }
-
 }

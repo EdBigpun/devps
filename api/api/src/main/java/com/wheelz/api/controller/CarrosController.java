@@ -3,7 +3,7 @@ package com.wheelz.api.controller;
 import com.wheelz.api.dto.carro.CarrosResponseDTO;
 import com.wheelz.api.dto.carro.CarrosSavingRequestDTO;
 import com.wheelz.api.dto.carro.CarrosUpdateRequestDTO;
-import com.wheelz.api.entity.usuario.TipoUsuario;
+import com.wheelz.api.entity.carro.Carros;
 import com.wheelz.api.service.carros.CarrosService;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.BadRequestException;
@@ -13,7 +13,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,11 +28,21 @@ public class CarrosController {
     public ResponseEntity<List<CarrosResponseDTO>> getAllCarros() {
         return ResponseEntity.ok(carrosService.findByAll());
     }
-
     @GetMapping("/{id}")
     public ResponseEntity<CarrosResponseDTO> getCarroById(@PathVariable Long id) {
         return ResponseEntity.ok(carrosService.findByCarroId(id));
     }
+    @GetMapping("/buscarpormarca")
+    public ResponseEntity<List<Carros>> buscarPorMarca(@RequestParam String marcaBuscada) {
+        List<Carros> carros = carrosService.buscarCarrosPorMarca(marcaBuscada);
+        return ResponseEntity.ok(carros);
+    }
+    @GetMapping("/buscarpormodelo")
+    public ResponseEntity<List<Carros>> buscarPorModelo(@RequestParam String modeloBuscado) {
+        List<Carros> carros = carrosService.buscarCarrosPorModelo(modeloBuscado);
+        return ResponseEntity.ok(carros);
+    }
+
     @PostMapping
     public ResponseEntity<?> saveCarros(@Validated @RequestBody CarrosSavingRequestDTO carro, BindingResult result) {
         if (result.hasErrors()){
@@ -48,7 +57,7 @@ public class CarrosController {
         }catch (IllegalArgumentException e){
             String errorMessage = e.getMessage();
             return ResponseEntity.badRequest().body(errorMessage);
-            }
+        }
     }
 
     @PutMapping("/{id}")
