@@ -17,12 +17,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/api/carros")
 @CrossOrigin("*")
+@RequiredArgsConstructor
 public class CarrosController {
 
-    private final CarrosService carrosService;
+    private CarrosService carrosService;
 
     @GetMapping("/all")
     public ResponseEntity<List<CarrosResponseDTO>> getAllCarros() {
