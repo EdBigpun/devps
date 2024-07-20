@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class ControllerAdvice {
     @ExceptionHandler(value = RequestException.class)
-    public ResponseEntity<ErrorDTO> requestExceptionHandler(RequestException ex){
+    public ResponseEntity<ErrorDTO> requestExceptionHandler(RequestException ex) {
         ErrorDTO error = ErrorDTO.builder().message(ex.getMessage()).build();
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }

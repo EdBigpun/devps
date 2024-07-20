@@ -1,7 +1,6 @@
 package com.wheelz.api.dto.pago;
 
 import com.wheelz.api.entity.pago.TipoEstadoPago;
-import com.wheelz.api.entity.reserva.Reserva;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

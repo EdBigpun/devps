@@ -9,7 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name= "usuario")
+@Table(name = "usuario")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -41,5 +41,5 @@ public class Usuario {
     private TipoUsuario tipoUsuario;
 
     @Column(name = "activo")
-    private boolean active ;
+    private boolean active;
 }

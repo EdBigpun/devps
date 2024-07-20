@@ -23,18 +23,18 @@ public class TipoCoberturaController {
     private final TipoCoberturaService tipoCoberturaService;
 
     @GetMapping("/all")
-    public ResponseEntity<?> getAllCoberturas(){
+    public ResponseEntity<?> getAllCoberturas() {
         return ResponseEntity.ok(tipoCoberturaService.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getReservaPorId(@PathVariable Long id){
+    public ResponseEntity<?> getReservaPorId(@PathVariable Long id) {
         return ResponseEntity.ok(tipoCoberturaService.findByTipoCoberturaId(id));
     }
 
     @PostMapping
-    public ResponseEntity<?> saveTipoCobertura(@Valid @RequestBody TipoCoberturaSavingRequest tipoCobertura, BindingResult result){
-        if (result.hasErrors()){
+    public ResponseEntity<?> saveTipoCobertura(@Valid @RequestBody TipoCoberturaSavingRequest tipoCobertura, BindingResult result) {
+        if (result.hasErrors()) {
             List<String> errorMessages = result.getAllErrors()
                     .stream()
                     .map(error -> error.getDefaultMessage())
@@ -51,7 +51,7 @@ public class TipoCoberturaController {
 
     @PutMapping
     public ResponseEntity<?> updateTipoCobertura(@PathVariable Long id, @Valid @RequestBody TipoCoberturaSavingRequest tipoCoberturaUpdate) throws BadRequestException {
-        return ResponseEntity.ok(tipoCoberturaService.update(id,tipoCoberturaUpdate));
+        return ResponseEntity.ok(tipoCoberturaService.update(id, tipoCoberturaUpdate));
     }
 
     @DeleteMapping("/{id}")

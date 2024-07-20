@@ -2,7 +2,6 @@ package com.wheelz.api.controller;
 
 import com.wheelz.api.dto.reserva.ReservaSavingRequest;
 import com.wheelz.api.dto.reserva.ReservaUpdateRequest;
-import com.wheelz.api.dto.reserva.tipocobertura.TipoCoberturaSavingRequest;
 import com.wheelz.api.entity.usuario.TipoUsuario;
 import com.wheelz.api.service.reserva.ReservaService;
 import jakarta.validation.Valid;
@@ -16,23 +15,27 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("/api/reserva")
 @RequiredArgsConstructor
 @CrossOrigin("*")
 public class ReservaController {
     private final ReservaService reservaService;
+
     @GetMapping("/all")
-    public ResponseEntity<?> getAllReservas(){
+    public ResponseEntity<?> getAllReservas() {
         return ResponseEntity.ok(reservaService.findByAll());
     }
+
     @GetMapping("/{id}")
-    public ResponseEntity<?> getReservaPorId(@PathVariable Long id){
+    public ResponseEntity<?> getReservaPorId(@PathVariable Long id) {
         return ResponseEntity.ok(reservaService.findByReservaId(id));
     }
+
     @PostMapping
-    public ResponseEntity<?> saveReserva(@Valid @RequestBody ReservaSavingRequest reserva, BindingResult result){
-        if (result.hasErrors()){
+    public ResponseEntity<?> saveReserva(@Valid @RequestBody ReservaSavingRequest reserva, BindingResult result) {
+        if (result.hasErrors()) {
             List<String> errorMessages = result.getAllErrors()
                     .stream()
                     .map(error -> error.getDefaultMessage())
@@ -55,6 +58,6 @@ public class ReservaController {
 
     @PutMapping
     public ResponseEntity<?> updateReserva(@PathVariable Long id, @Valid @RequestBody ReservaUpdateRequest reservaUpdate) throws BadRequestException {
-        return ResponseEntity.ok(reservaService.update(id,reservaUpdate));
+        return ResponseEntity.ok(reservaService.update(id, reservaUpdate));
     }
 }

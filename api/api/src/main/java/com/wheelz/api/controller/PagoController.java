@@ -25,14 +25,15 @@ public class PagoController {
     public ResponseEntity<?> getAllPagos() {
         return ResponseEntity.ok(pagoService.findByAll());
     }
+
     @GetMapping("/{id}")
-    public ResponseEntity<?> getPagosPorId(@PathVariable Long id){
+    public ResponseEntity<?> getPagosPorId(@PathVariable Long id) {
         return ResponseEntity.ok(pagoService.findByPagoId(id));
     }
 
     @PostMapping
-    public ResponseEntity<?> savePago(@Valid @RequestBody PagoSavingRequest pago, BindingResult result){
-        if(result.hasErrors()){
+    public ResponseEntity<?> savePago(@Valid @RequestBody PagoSavingRequest pago, BindingResult result) {
+        if (result.hasErrors()) {
             List<String> errorMessages = result.getAllErrors()
                     .stream()
                     .map(error -> error.getDefaultMessage())
@@ -41,9 +42,9 @@ public class PagoController {
         }
         try {
             return ResponseEntity.ok(pagoService.save(pago));
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             String errorMessage = e.getMessage();
-            if(errorMessage.contains("Tipo de Pago Invalidado")){
+            if (errorMessage.contains("Tipo de Pago Invalidado")) {
                 String acceptedValues = Arrays.stream(TipoUsuario.values())
                         .map(Enum::name)
                         .collect(Collectors.joining(", "));

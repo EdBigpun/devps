@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UsuarioMapper {
-    public UsuarioResponse toUsuarioResponse(Usuario usuario){
-        if(usuario == null){
+    public UsuarioResponse toUsuarioResponse(Usuario usuario) {
+        if (usuario == null) {
             throw new RequestException("Usuario no puede ser nulo!");
         }
         return UsuarioResponse.builder()
@@ -40,8 +40,8 @@ public class UsuarioMapper {
                 .build();
     }
 
-    public Usuario usuarioRequestToPost(UsuarioSavingRequest usuario){
-        if (usuario == null){
+    public Usuario usuarioRequestToPost(UsuarioSavingRequest usuario) {
+        if (usuario == null) {
             throw new RequestException("Usuario no puede ser nulo!!!");
         }
         return Usuario.builder()

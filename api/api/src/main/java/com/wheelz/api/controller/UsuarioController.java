@@ -27,10 +27,11 @@ import java.util.stream.Collectors;
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
+
     @PostMapping("/login")
-    public ResponseEntity<?> loginUsuario(@Valid @RequestBody LoginRequestDTO loginRequestDTO){
+    public ResponseEntity<?> loginUsuario(@Valid @RequestBody LoginRequestDTO loginRequestDTO) {
         Usuario authenticatedUser = usuarioService.login(loginRequestDTO);
-        if(authenticatedUser != null){
+        if (authenticatedUser != null) {
             UsuarioResponse usuarioResponse = new UsuarioResponse();
             usuarioResponse.setId(Long.valueOf(authenticatedUser.getId()));
             usuarioResponse.setNombre(authenticatedUser.getNombre());
@@ -45,13 +46,15 @@ public class UsuarioController {
     public ResponseEntity<?> getAllUsuarios() {
         return ResponseEntity.ok(usuarioService.findByAll());
     }
+
     @GetMapping("/{id}")
-    public ResponseEntity<?> getUsuarioPorId(@PathVariable Long id){
+    public ResponseEntity<?> getUsuarioPorId(@PathVariable Long id) {
         return ResponseEntity.ok(usuarioService.findUsuarioConContraseñaId(id));
     }
+
     @PostMapping
-    public ResponseEntity<?> saveUsuario(@Valid @RequestBody UsuarioSavingRequest usuario, BindingResult result){
-        if (result.hasErrors()){
+    public ResponseEntity<?> saveUsuario(@Valid @RequestBody UsuarioSavingRequest usuario, BindingResult result) {
+        if (result.hasErrors()) {
             List<String> errorMessages = result.getAllErrors()
                     .stream()
                     .map(error -> error.getDefaultMessage())
@@ -73,12 +76,12 @@ public class UsuarioController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<?> updateUsuario(@PathVariable Long id, @Valid @RequestBody UsuarioUpdateRequest usuarioUpdate) throws BadRequestException{
-        return ResponseEntity.ok(usuarioService.update(id,usuarioUpdate));
+    public ResponseEntity<?> updateUsuario(@PathVariable Long id, @Valid @RequestBody UsuarioUpdateRequest usuarioUpdate) throws BadRequestException {
+        return ResponseEntity.ok(usuarioService.update(id, usuarioUpdate));
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<?> desactivarUsuario(@PathVariable Long id){
+    public ResponseEntity<?> desactivarUsuario(@PathVariable Long id) {
         usuarioService.desactivar(id);
         return ResponseEntity.ok(HttpStatus.OK);
     }

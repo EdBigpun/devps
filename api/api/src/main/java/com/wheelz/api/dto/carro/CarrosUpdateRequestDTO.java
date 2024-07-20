@@ -23,4 +23,4 @@ public class CarrosUpdateRequestDTO {
 
     private Boolean activo;
 
-    }
+}

@@ -23,8 +23,9 @@ public class ReservaMapper {
     private CarrosService carrosService;
     @Autowired
     private TipoCoberturaService tipoCoberturaService;
+
     public ReservaResponse toReservaResponse(Reserva reserva) {
-        if (reserva == null){
+        if (reserva == null) {
             throw new RequestException("Reserva no puede ser nulo!");
         }
         return ReservaResponse.builder()
@@ -39,8 +40,8 @@ public class ReservaMapper {
                 .build();
     }
 
-    public Reserva reservaRequestToPost(ReservaSavingRequest reserva){
-        if (reserva == null){
+    public Reserva reservaRequestToPost(ReservaSavingRequest reserva) {
+        if (reserva == null) {
             throw new RequestException("Reserva no puede ser nulo!!!");
         }
 
