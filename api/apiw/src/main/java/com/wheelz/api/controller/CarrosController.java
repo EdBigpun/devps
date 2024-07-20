@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class CarrosController {
 
-    private CarrosService carrosService;
+    private final CarrosService carrosService;
 
     @GetMapping("/all")
     public ResponseEntity<List<CarrosResponseDTO>> getAllCarros() {
