@@ -43,6 +43,7 @@ public class CarrosSavingRequestDTO {
     @NotNull(message = "La disponibilidad es obligatoria.")
     private Boolean disponibilidad;
 
-    @NotNull(message = "El año es obligatoria.")
+    @NotNull(message = "El año es obligatorio.")
+    @Min(value = 1886, message = "El año debe ser mayor o igual a 1886.") // Año del primer automóvil
     private int año;
 }

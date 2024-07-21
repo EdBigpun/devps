@@ -20,18 +20,19 @@ public class CarrosUpdateRequestDTO {
 
     private String marca;
     private String modelo;
-    @Pattern(regexp = "^[A-Z]{3}[0-9]{3}$", message = "La placa debe tener el formato de tres letras mayúsculas seguidas de tres números.")
+    @Pattern(regexp = "^[A-Z]{3}-[0-9]{3}$", message = "La placa debe tener el formato de tres letras mayúsculas seguidas un guion y  tres números.")
     private String placa;
     private Categoria categoria;
     private TipoTransmision tipoTransmision;
     private String imagenes;
     @Positive(message = "El precio por día debe de ser un valor positivo.")
-    @Min(value = 100000, message = "El precio por día debe de ser como mínimo $ 100,000.")
+    @Min(value = 10000, message = "El precio por día debe de ser como mínimo $ 100,000.")
     private BigDecimal precioDia;
 
     private Boolean disponibilidad;
 
     private Boolean activo;
+    @Min(value = 1886, message = "El año debe ser mayor o igual a 1886.") // Año del primer automóvil
     private int año;
 
 }
