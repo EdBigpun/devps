@@ -16,16 +16,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ReservaMapper {
-
-    @Autowired
     private UsuarioService usuarioService;
-
     private CarrosService carrosService;
-    @Autowired
     private TipoCoberturaService tipoCoberturaService;
-
     public ReservaResponse toReservaResponse(Reserva reserva) {
-        if (reserva == null) {
+        if (reserva == null){
             throw new RequestException("Reserva no puede ser nulo!");
         }
         return ReservaResponse.builder()
@@ -40,8 +35,8 @@ public class ReservaMapper {
                 .build();
     }
 
-    public Reserva reservaRequestToPost(ReservaSavingRequest reserva) {
-        if (reserva == null) {
+    public Reserva reservaRequestToPost(ReservaSavingRequest reserva){
+        if (reserva == null){
             throw new RequestException("Reserva no puede ser nulo!!!");
         }
 
@@ -56,7 +51,6 @@ public class ReservaMapper {
                 .fechaEntrega(reserva.getFechaEntrega())
                 .fechaDevolucion(reserva.getFechaDevolucion())
                 .estadoReserva(reserva.getEstadoReserva())
-                .precioTotal(reserva.getPrecioTotal())
                 .build();
     }
 }

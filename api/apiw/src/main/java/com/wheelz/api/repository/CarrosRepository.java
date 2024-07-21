@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CarrosRepository extends JpaRepository<Carros, Long> {
+    List<Carros> findByActiveTrue();
     Optional<Carros> findByPlaca(String placa);
-
     @Query(value = "CALL buscarPorMarca(:marcaBuscada)", nativeQuery = true)
     List<Carros> buscarPorMarca(@Param("marcaBuscada") String marcaBuscada);
 

@@ -29,6 +29,11 @@ public class CarrosController {
         return ResponseEntity.ok(carrosService.findByAll());
     }
 
+    @GetMapping("/active")
+    public ResponseEntity<List<CarrosResponseDTO>> getActiveCarros() {
+        return ResponseEntity.ok(carrosService.findActive());
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<CarrosResponseDTO> getCarroById(@PathVariable Long id) {
         return ResponseEntity.ok(carrosService.findByCarroId(id));

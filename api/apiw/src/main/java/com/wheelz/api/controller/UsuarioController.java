@@ -47,6 +47,10 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioService.findByAll());
     }
 
+    @GetMapping("/active")
+    public ResponseEntity<List<UsuarioResponse>> getActiveUsuarios() {
+        return ResponseEntity.ok(usuarioService.findActive());
+    }
     @GetMapping("/{id}")
     public ResponseEntity<?> getUsuarioPorId(@PathVariable Long id) {
         return ResponseEntity.ok(usuarioService.findUsuarioConContrasenhaId(id));

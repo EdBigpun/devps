@@ -21,12 +21,14 @@ public class CarrosService {
     private final CarrosRepository carrosRepository;
     @Lazy
     private final CarrosMapper carrosMapper;
-
     public List<CarrosResponseDTO> findByAll() {
         return carrosRepository.findAll().stream()
                 .map(carrosMapper::toCarrosResponseDTO).toList();
     }
-
+    public List<CarrosResponseDTO> findActive() {
+        return carrosRepository.findByActiveTrue().stream()
+                .map(carrosMapper::toCarrosResponseDTO).toList();
+    }
     public Carros getCarroById(Long id) {
         if (id == null || id == 0) {
             throw new RequestException("Id invalido!!!");
@@ -34,23 +36,19 @@ public class CarrosService {
         return carrosRepository.findById(id)
                 .orElseThrow(() -> new RequestException("Carro no encontrado.!"));
     }
-
     public CarrosResponseDTO findByCarroId(Long id) {
-        if (id == null || id == 0) {
+        if (id == null|| id == 0){
             throw new RequestException("Id invalido!!!");
         }
         Carros carros = carrosRepository.findById(id).orElseThrow(() -> new RequestException("Usuario no encontrado.!"));
         return carrosMapper.toCarrosResponseDTO(carros);
     }
-
     public List<Carros> buscarCarrosPorMarca(String marcaBuscada) {
         return carrosRepository.buscarPorMarca(marcaBuscada);
     }
-
     public List<Carros> buscarCarrosPorModelo(String modeloBuscado) {
         return carrosRepository.buscarPorModelo(modeloBuscado);
     }
-
     public CarrosResponseDTO saveCarros(CarrosSavingRequestDTO carrosSavingRequestDTO) {
         verificarDatosRepetidos(carrosSavingRequestDTO);
         Carros carro = carrosMapper.carrosRequestToPost(carrosSavingRequestDTO);
@@ -62,7 +60,6 @@ public class CarrosService {
             throw new RequestException("Error al guardar el carro: " + e.getMessage());
         }
     }
-
     private void verificarDatosRepetidos(CarrosSavingRequestDTO carrosSavingRequestDTO) {
         Optional<Carros> carroOptional = carrosRepository.findByPlaca(carrosSavingRequestDTO.getPlaca());
         if (carroOptional.isPresent()) {
@@ -71,7 +68,7 @@ public class CarrosService {
     }
 
     public CarrosResponseDTO updateCarros(Long id, CarrosUpdateRequestDTO carrosUpdateRequestDTO) throws BadRequestException {
-        if (id == null || id <= 0) {
+        if (id == null || id <= 0){
             throw new BadRequestException("ID de carro invalido");
         }
         Carros carro = carrosRepository.findById(id).orElseThrow(() -> new RuntimeException("Carro no encontrado con id: " + id));
@@ -87,17 +84,16 @@ public class CarrosService {
         carro.setActive(true);
         return carrosMapper.toCarrosResponseDTO(carrosRepository.save(carro));
     }
-
     public void desactivar(Long id) {
         if (id == null || id <= 0) {
             throw new RequestException("El ID es invalido o inexistente.");
         }
         Optional<Carros> carroOptional = carrosRepository.findById(id);
-        if (!carroOptional.isPresent()) {
+        if (!carroOptional.isPresent()){
             throw new RequestException("No se encontro ningun usuario con el id : " + id);
         }
         Carros carro = carroOptional.get();
-        if (!carro.isActive()) {
+        if (!carro.isActive()){
             throw new RequestException("El carro ya esta desactivado.");
         }
         carro.setActive(false);

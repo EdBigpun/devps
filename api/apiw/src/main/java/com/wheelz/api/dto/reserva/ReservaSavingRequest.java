@@ -30,6 +30,4 @@ public class ReservaSavingRequest {
     @NotNull
     @Enumerated(EnumType.STRING)
     private EstadoReserva estadoReserva;
-    @NotNull(message = "El Precio Total no puede estar vacio")
-    private BigDecimal precioTotal;
 }
