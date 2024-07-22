@@ -16,8 +16,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ReservaMapper {
+    @Autowired
     private UsuarioService usuarioService;
+    @Autowired
     private CarrosService carrosService;
+    @Autowired
     private TipoCoberturaService tipoCoberturaService;
     public ReservaResponse toReservaResponse(Reserva reserva) {
         if (reserva == null){

@@ -10,6 +10,7 @@ import com.wheelz.api.service.usuario.UsuarioService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.BadRequestException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -25,7 +26,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @CrossOrigin("*")
 public class UsuarioController {
-
+    @Autowired
     private final UsuarioService usuarioService;
 
     @PostMapping("/login")

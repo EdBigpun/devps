@@ -19,7 +19,7 @@ import java.util.Optional;
 public class CarrosService {
 
     private final CarrosRepository carrosRepository;
-    @Lazy
+
     private final CarrosMapper carrosMapper;
     public List<CarrosResponseDTO> findByAll() {
         return carrosRepository.findAll().stream()
