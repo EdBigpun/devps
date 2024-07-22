@@ -84,6 +84,11 @@ public class UsuarioController {
     public ResponseEntity<?> updateUsuario(@PathVariable Long id, @Valid @RequestBody UsuarioUpdateRequest usuarioUpdate) throws BadRequestException {
         return ResponseEntity.ok(usuarioService.update(id, usuarioUpdate));
     }
+    @PatchMapping("/{id}")
+    public ResponseEntity<?> activarUsuario(@PathVariable Long id) {
+        usuarioService.activar(id);
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
 
     @PatchMapping("/{id}")
     public ResponseEntity<?> desactivarUsuario(@PathVariable Long id) {

@@ -113,7 +113,21 @@ public class UsuarioService {
 
         return usuarioMapper.toUsuarioResponse(usuarioRepository.save(usuario));
     }
-
+    public void activar(Long id) {
+        if (id == null || id <= 0) {
+            throw new RequestException("El ID es invalido o inexistente.");
+        }
+        Optional<Usuario> usuarioOptional = usuarioRepository.findById(id);
+        if (!usuarioOptional.isPresent()) {
+            throw new RequestException("No se encontro ningun usuario con el id : " + id);
+        }
+        Usuario usuario = usuarioOptional.get();
+        if (!usuario.isActive()) {
+            throw new RequestException("El usuario ya está desactivado.");
+        }
+        usuario.setActive(true);
+        usuarioRepository.save(usuario);
+    }
 
     public void desactivar(Long id) {
         if (id == null || id <= 0) {
