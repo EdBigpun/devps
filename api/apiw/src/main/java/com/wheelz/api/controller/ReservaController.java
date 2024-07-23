@@ -56,7 +56,7 @@ public class ReservaController {
         }
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     public ResponseEntity<?> updateReserva(@PathVariable Long id, @Valid @RequestBody ReservaUpdateRequest reservaUpdate) throws BadRequestException {
         return ResponseEntity.ok(reservaService.update(id, reservaUpdate));
     }
