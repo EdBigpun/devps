@@ -15,9 +15,5 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ReservaUpdateRequest {
-    private Date fechaEntrega;
-    private Date fechaDevolucion;
-    private TipoCobertura idTipoCobertura;
     private EstadoReserva estadoReserva;
-    private BigDecimal precioTotal;
 }

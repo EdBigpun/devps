@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -29,9 +30,10 @@ public class CarrosService {
         return carrosRepository.findAll().stream()
                 .map(carrosMapper::toCarrosResponseDTO).toList();
     }
-    public List<CarrosResponseDTO> findActive() {
-        return carrosRepository.findByActiveTrue().stream()
-                .map(carrosMapper::toCarrosResponseDTO).toList();
+    public List<CarrosResponseDTO> findActiveAndDisponible() {
+        return carrosRepository.findByActiveTrueAndDisponibilidadTrue().stream()
+                .map(carrosMapper::toCarrosResponseDTO)
+                .collect(Collectors.toList());
     }
     public Carros getCarroById(Long id) {
         if (id == null || id == 0) {

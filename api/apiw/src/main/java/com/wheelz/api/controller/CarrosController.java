@@ -34,8 +34,8 @@ public class CarrosController {
         return ResponseEntity.ok(carrosService.findByAll());
     }
     @GetMapping("/active")
-    public ResponseEntity<List<CarrosResponseDTO>> getActiveCarros() {
-        return ResponseEntity.ok(carrosService.findActive());
+    public ResponseEntity<List<CarrosResponseDTO>> getActivesCarros() {
+        return ResponseEntity.ok(carrosService.findActiveAndDisponible());
     }
     @GetMapping("/{id}")
     @PreAuthorize("hasAnyRole('CLIENTE', 'ADMIN')")

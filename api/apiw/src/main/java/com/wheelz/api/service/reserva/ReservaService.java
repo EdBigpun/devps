@@ -131,15 +131,6 @@ public class ReservaService {
 
         Carros carro = reserva.getCarro();
 
-        if (reservaUpdate.getFechaEntrega() != null){
-            reserva.setFechaEntrega(reservaUpdate.getFechaEntrega());
-        }
-        if (reservaUpdate.getFechaDevolucion() != null){
-            reserva.setFechaDevolucion(reservaUpdate.getFechaDevolucion());
-        }
-        if (reservaUpdate.getIdTipoCobertura() != null){
-            reserva.setTipoCobertura(reservaUpdate.getIdTipoCobertura());
-        }
         if (reservaUpdate.getEstadoReserva() != null){
             reserva.setEstadoReserva(reservaUpdate.getEstadoReserva());
 
@@ -148,9 +139,7 @@ public class ReservaService {
                 carrosRepository.save(carro);
             }
         }
-        if (reservaUpdate.getPrecioTotal() != null){
-            reserva.setPrecioTotal(reservaUpdate.getPrecioTotal());
-        }
+
         try {
             Reserva updatedReserva = reservaRepository.save(reserva);
             return reservaMapper.toReservaResponse(updatedReserva);
