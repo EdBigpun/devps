@@ -32,7 +32,7 @@ public class CarrosController {
 
     @GetMapping("/active")
     public ResponseEntity<List<CarrosResponseDTO>> getActiveCarros() {
-        return ResponseEntity.ok(carrosService.findActive());
+        return ResponseEntity.ok(carrosService.findActiveAndDisponible());
     }
 
     @GetMapping("/{id}")
