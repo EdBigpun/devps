@@ -1,6 +1,6 @@
 package com.wheelz.api.service.usuario;
 
-import com.wheelz.api.dto.usuario.UsuarioContrasenhaResponse;
+import com.wheelz.api.dto.usuario.UsuarioContraseñaResponse;
 import com.wheelz.api.dto.usuario.UsuarioResponse;
 import com.wheelz.api.dto.usuario.UsuarioSavingRequest;
 import com.wheelz.api.entity.usuario.Usuario;
@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UsuarioMapper {
-    public UsuarioResponse toUsuarioResponse(Usuario usuario) {
-        if (usuario == null) {
+    public UsuarioResponse toUsuarioResponse(Usuario usuario){
+        if(usuario == null){
             throw new RequestException("Usuario no puede ser nulo!");
         }
         return UsuarioResponse.builder()
@@ -24,11 +24,11 @@ public class UsuarioMapper {
                 .build();
     }
 
-    public UsuarioContrasenhaResponse toUsuarioConContrasenaResponse(Usuario usuario) {
+    public UsuarioContraseñaResponse toUsuarioConContrasenaResponse(Usuario usuario) {
         if (usuario == null) {
             throw new RequestException("Usuario no puede ser nulo!");
         }
-        return UsuarioContrasenhaResponse.builder()
+        return UsuarioContraseñaResponse.builder()
                 .id(usuario.getId())
                 .nombre(usuario.getNombre())
                 .apellido(usuario.getApellido())
@@ -40,8 +40,8 @@ public class UsuarioMapper {
                 .build();
     }
 
-    public Usuario usuarioRequestToPost(UsuarioSavingRequest usuario) {
-        if (usuario == null) {
+    public Usuario usuarioRequestToPost(UsuarioSavingRequest usuario){
+        if (usuario == null){
             throw new RequestException("Usuario no puede ser nulo!!!");
         }
         return Usuario.builder()

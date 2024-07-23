@@ -1,8 +1,10 @@
 package com.wheelz.api.dto.pago;
 
 import com.wheelz.api.entity.pago.TipoEstadoPago;
+import com.wheelz.api.entity.reserva.Reserva;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

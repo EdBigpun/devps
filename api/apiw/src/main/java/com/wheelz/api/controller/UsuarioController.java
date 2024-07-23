@@ -10,9 +10,9 @@ import com.wheelz.api.service.usuario.UsuarioService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.BadRequestException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,13 +26,13 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @CrossOrigin("*")
 public class UsuarioController {
-    @Autowired
-    private final UsuarioService usuarioService;
 
+    private final UsuarioService usuarioService;
+    /*
     @PostMapping("/login")
-    public ResponseEntity<?> loginUsuario(@Valid @RequestBody LoginRequestDTO loginRequestDTO) {
+    public ResponseEntity<?> loginUsuario(@Valid @RequestBody LoginRequestDTO loginRequestDTO){
         Usuario authenticatedUser = usuarioService.login(loginRequestDTO);
-        if (authenticatedUser != null) {
+        if(authenticatedUser != null){
             UsuarioResponse usuarioResponse = new UsuarioResponse();
             usuarioResponse.setId(Long.valueOf(authenticatedUser.getId()));
             usuarioResponse.setNombre(authenticatedUser.getNombre());
@@ -42,24 +42,27 @@ public class UsuarioController {
         }
         throw new RuntimeException("Error en Login");
     }
-
+    */
     @GetMapping("/all")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> getAllUsuarios() {
         return ResponseEntity.ok(usuarioService.findByAll());
     }
 
     @GetMapping("/active")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<UsuarioResponse>> getActiveUsuarios() {
         return ResponseEntity.ok(usuarioService.findActive());
     }
     @GetMapping("/{id}")
-    public ResponseEntity<?> getUsuarioPorId(@PathVariable Long id) {
-        return ResponseEntity.ok(usuarioService.findUsuarioConContrasenhaId(id));
+    @PreAuthorize("hasAnyRole('CLIENTE', 'ADMIN')")
+    public ResponseEntity<?> getUsuarioPorId(@PathVariable Long id){
+        return ResponseEntity.ok(usuarioService.findUsuarioConContraseñaId(id));
     }
-
+    /*
     @PostMapping
-    public ResponseEntity<?> saveUsuario(@Valid @RequestBody UsuarioSavingRequest usuario, BindingResult result) {
-        if (result.hasErrors()) {
+    public ResponseEntity<?> saveUsuario(@Valid @RequestBody UsuarioSavingRequest usuario, BindingResult result){
+        if (result.hasErrors()){
             List<String> errorMessages = result.getAllErrors()
                     .stream()
                     .map(error -> error.getDefaultMessage())
@@ -78,20 +81,17 @@ public class UsuarioController {
             }
             return ResponseEntity.badRequest().body(Collections.singletonMap("error", errorMessage));
         }
-    }
+    }*/
 
     @PutMapping("{id}")
-    public ResponseEntity<?> updateUsuario(@PathVariable Long id, @Valid @RequestBody UsuarioUpdateRequest usuarioUpdate) throws BadRequestException {
-        return ResponseEntity.ok(usuarioService.update(id, usuarioUpdate));
-    }
-    @PatchMapping("/activar/{id}")
-    public ResponseEntity<?> activarUsuario(@PathVariable Long id) {
-        usuarioService.activar(id);
-        return ResponseEntity.ok(HttpStatus.OK);
+    @PreAuthorize("hasAnyRole('CLIENTE')")
+    public ResponseEntity<?> updateUsuario(@PathVariable Long id, @Valid @RequestBody UsuarioUpdateRequest usuarioUpdate) throws BadRequestException{
+        return ResponseEntity.ok(usuarioService.update(id,usuarioUpdate));
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<?> desactivarUsuario(@PathVariable Long id) {
+    @PreAuthorize("hasAnyRole('CLIENTE')")
+    public ResponseEntity<?> desactivarUsuario(@PathVariable Long id){
         usuarioService.desactivar(id);
         return ResponseEntity.ok(HttpStatus.OK);
     }

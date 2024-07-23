@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
-@Table(name = "reserva")
+@Table(name= "reserva")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class TipoCoberturaMapper {
 
-    public TipoCoberturaResponse toTipoCoberturaResponse(TipoCobertura tipoCobertura) {
-        if (tipoCobertura == null) {
+    public TipoCoberturaResponse toTipoCoberturaResponse(TipoCobertura tipoCobertura){
+        if (tipoCobertura == null){
             throw new RequestException("El Tipo de Cobertura no puede ser nulo!");
         }
         return TipoCoberturaResponse.builder()
@@ -20,8 +20,8 @@ public class TipoCoberturaMapper {
                 .build();
     }
 
-    public TipoCobertura tipoCoberturaRequestToPost(TipoCoberturaSavingRequest tipoCoberturaSavingRequest) {
-        if (tipoCoberturaSavingRequest == null) {
+    public TipoCobertura tipoCoberturaRequestToPost(TipoCoberturaSavingRequest tipoCoberturaSavingRequest){
+        if (tipoCoberturaSavingRequest == null){
             throw new RequestException("El Tipo de Cobertura no puede ser nulo!");
         }
         return TipoCobertura.builder()

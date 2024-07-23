@@ -12,10 +12,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class PagoMapper {
     @Autowired
-    private ReservaRepository reservaRepository;
-
-    public PagoResponse toPagoResponse(Pago pago) {
-        if (pago == null) {
+    private  ReservaRepository reservaRepository;
+    public PagoResponse toPagoResponse(Pago pago){
+        if(pago == null){
             throw new RequestException("Pago no puede ser nulo");
         }
         return PagoResponse.builder()
@@ -27,8 +26,8 @@ public class PagoMapper {
                 .build();
     }
 
-    public Pago pagoRequestToPost(PagoSavingRequest pago) {
-        if (pago == null) {
+    public Pago pagoRequestToPost(PagoSavingRequest pago){
+        if(pago == null){
             throw new RequestException("Pago no puede ser nulo");
         }
         Reserva reserva = reservaRepository.findById(pago.getIdReserva())

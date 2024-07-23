@@ -30,7 +30,6 @@ public class TipoCoberturaService {
         return coberturaRepository.findAll().stream()
                 .map(tipoCoberturaMapper::toTipoCoberturaResponse).toList();
     }
-
     public TipoCobertura getCoberturaById(Long id) {
         if (id == null || id == 0) {
             throw new RequestException("Id invalido!!!");
@@ -41,7 +40,7 @@ public class TipoCoberturaService {
 
 
     public TipoCoberturaResponse findByTipoCoberturaId(Long id) {
-        if (id == null || id == 0) {
+        if (id == null|| id == 0){
             throw new RequestException("Id invalido!!!");
         }
         TipoCobertura tipoCobertura = coberturaRepository.findById(id).orElseThrow(() -> new RequestException("Tipo de Cobertura no encontrada.!"));
@@ -60,7 +59,7 @@ public class TipoCoberturaService {
         }
     }
 
-    public void verificacionDatosRepetidos(TipoCoberturaSavingRequest tipoCobertura) {
+    public void verificacionDatosRepetidos(TipoCoberturaSavingRequest tipoCobertura){
         Optional<TipoCobertura> coberturaOptional = coberturaRepository.findByNombre(tipoCobertura.getNombre());
         if (coberturaOptional.isPresent()) {
             throw new RequestException("Nombre Repetido!");
@@ -68,15 +67,15 @@ public class TipoCoberturaService {
     }
 
     public TipoCoberturaResponse update(Long id, @Valid TipoCoberturaSavingRequest coberturaUpdate) throws BadRequestException {
-        if (id == null || id <= 0) {
+        if (id == null || id <= 0){
             throw new BadRequestException("ID de Tipo Cobertura invalido");
         }
         TipoCobertura cobertura = coberturaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Id Tipo Cobertura inexistende!!!"));
-        if (coberturaUpdate.getNombre() != null) {
+                .orElseThrow(()->new RuntimeException("Id Tipo Cobertura inexistende!!!"));
+        if (coberturaUpdate.getNombre() != null){
             cobertura.setNombre(coberturaUpdate.getNombre());
         }
-        if (coberturaUpdate.getPorcentaje() != null) {
+        if (coberturaUpdate.getPorcentaje() != null){
             cobertura.setPorcentaje(coberturaUpdate.getPorcentaje());
         }
         return tipoCoberturaMapper.toTipoCoberturaResponse(coberturaRepository.save(cobertura));

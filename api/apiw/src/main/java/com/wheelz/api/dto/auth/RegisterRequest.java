@@ -1,9 +1,12 @@
-package com.wheelz.api.dto.usuario;
+package com.wheelz.api.dto.auth;
 
 import com.wheelz.api.entity.usuario.TipoUsuario;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,9 +15,9 @@ import org.antlr.v4.runtime.misc.NotNull;
 
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class UsuarioSavingRequest {
+@NoArgsConstructor
+public class RegisterRequest {
     @NotBlank(message = "El nombre no puede estar vacio")
     private String nombre;
 
@@ -39,6 +42,4 @@ public class UsuarioSavingRequest {
     @NotNull
     @Enumerated(EnumType.STRING)
     private TipoUsuario tipoUsuario;
-
-    //private boolean active;
 }

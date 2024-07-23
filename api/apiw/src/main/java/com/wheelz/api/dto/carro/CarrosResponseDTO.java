@@ -2,10 +2,7 @@ package com.wheelz.api.dto.carro;
 
 import com.wheelz.api.entity.carro.Categoria;
 import com.wheelz.api.entity.carro.TipoTransmision;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
 

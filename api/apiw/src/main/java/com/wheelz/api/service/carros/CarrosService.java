@@ -3,7 +3,11 @@ package com.wheelz.api.service.carros;
 import com.wheelz.api.dto.carro.CarrosResponseDTO;
 import com.wheelz.api.dto.carro.CarrosSavingRequestDTO;
 import com.wheelz.api.dto.carro.CarrosUpdateRequestDTO;
+import com.wheelz.api.dto.usuario.UsuarioResponse;
 import com.wheelz.api.entity.carro.Carros;
+import com.wheelz.api.entity.carro.Categoria;
+import com.wheelz.api.entity.carro.TipoTransmision;
+import com.wheelz.api.entity.usuario.Usuario;
 import com.wheelz.api.exception.RequestException;
 import com.wheelz.api.repository.CarrosRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +23,7 @@ import java.util.Optional;
 public class CarrosService {
 
     private final CarrosRepository carrosRepository;
-
+    @Lazy
     private final CarrosMapper carrosMapper;
     public List<CarrosResponseDTO> findByAll() {
         return carrosRepository.findAll().stream()

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CarrosMapper {
     public CarrosResponseDTO toCarrosResponseDTO(Carros carro) {
-        if (carro == null) {
+        if(carro == null){
             throw new RequestException("Carro no puede ser nulo!");
         }
         return CarrosResponseDTO.builder()
@@ -27,8 +27,8 @@ public class CarrosMapper {
                 .build();
     }
 
-    public Carros carrosRequestToPost(CarrosSavingRequestDTO carro) {
-        if (carro == null) {
+    public Carros carrosRequestToPost(CarrosSavingRequestDTO carro){
+        if (carro == null){
             throw new RequestException("Usuario no puede ser nulo!!!");
         }
         return Carros.builder()

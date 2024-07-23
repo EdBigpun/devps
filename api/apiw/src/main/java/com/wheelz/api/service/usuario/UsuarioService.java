@@ -22,11 +22,12 @@ public class UsuarioService {
 
     public Usuario login(LoginRequestDTO loginRequestDTO) {
         Optional<Usuario> optionalUsuario = usuarioRepository.findByEmail(loginRequestDTO.getEmail());
-        if (optionalUsuario.isPresent()) {
+        if (optionalUsuario.isPresent()){
             Usuario usuario = optionalUsuario.get();
-            if (usuario.getContraseña().equals(loginRequestDTO.getContraseña())) {
+            if (usuario.getContraseña().equals(loginRequestDTO.getContraseña())){
                 return usuario;
-            } else {
+            }
+            else {
                 throw new IllegalArgumentException("Contraseña invalida!!!");
             }
         }
@@ -41,6 +42,7 @@ public class UsuarioService {
         return usuarioRepository.findByActiveTrue().stream()
                 .map(usuarioMapper::toUsuarioResponse).toList();
     }
+
     public Usuario getUsuarioById(Long id) {
         if (id == null || id == 0) {
             throw new RequestException("Id invalido!!!");
@@ -48,9 +50,8 @@ public class UsuarioService {
         return usuarioRepository.findById(id)
                 .orElseThrow(() -> new RequestException("Usuario no encontrado.!"));
     }
-
-    public UsuarioContrasenhaResponse findUsuarioConContrasenhaId(Long id) {
-        if (id == null || id == 0) {
+    public UsuarioContraseñaResponse findUsuarioConContraseñaId(Long id) {
+        if (id == null|| id == 0){
             throw new RequestException("Id invalido!!!");
         }
         Usuario usuario = usuarioRepository.findById(id).orElseThrow(() -> new RequestException("Usuario no encontrado.!"));
@@ -69,8 +70,7 @@ public class UsuarioService {
             throw new RequestException("Error al guardar el usuario: " + e.getMessage());
         }
     }
-
-    public void verificacionDatosRepetidos(UsuarioSavingRequest usuarioSavingRequest) {
+    public void verificacionDatosRepetidos(UsuarioSavingRequest usuarioSavingRequest){
         Optional<Usuario> usuarioOptional = usuarioRepository.findByEmail(usuarioSavingRequest.getEmail());
         if (usuarioOptional.isPresent()) {
             throw new RequestException("Email repetido!");
@@ -82,7 +82,7 @@ public class UsuarioService {
     }
 
     public UsuarioResponse update(Long id, UsuarioUpdateRequest usuarioUpdate) throws BadRequestException {
-        if (id == null || id <= 0) {
+        if (id == null || id <= 0){
             throw new BadRequestException("ID de usuario invalido");
         }
         Usuario usuario = usuarioRepository.findById(id)
@@ -113,23 +113,9 @@ public class UsuarioService {
 
         return usuarioMapper.toUsuarioResponse(usuarioRepository.save(usuario));
     }
-    public void activar(Long id) {
-        if (id == null || id <= 0) {
-            throw new RequestException("El ID es invalido o inexistente.");
-        }
-        Optional<Usuario> usuarioOptional = usuarioRepository.findById(id);
-        if (!usuarioOptional.isPresent()) {
-            throw new RequestException("No se encontro ningun usuario con el id : " + id);
-        }
-        Usuario usuario = usuarioOptional.get();
-        if (!usuario.isActive()) {
-            throw new RequestException("El usuario ya está desactivado.");
-        }
-        usuario.setActive(true);
-        usuarioRepository.save(usuario);
-    }
 
-    public void desactivar(Long id) {
+
+    public void desactivar(Long id){
         if (id == null || id <= 0) {
             throw new RequestException("El ID es invalido o inexistente.");
         }
@@ -144,4 +130,5 @@ public class UsuarioService {
         usuario.setActive(false);
         usuarioRepository.save(usuario);
     }
+
 }
