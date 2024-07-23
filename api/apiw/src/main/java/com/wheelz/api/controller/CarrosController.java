@@ -31,7 +31,7 @@ public class CarrosController {
     }
 
     @GetMapping("/active")
-    public ResponseEntity<List<CarrosResponseDTO>> getActiveCarros() {
+    public ResponseEntity<List<CarrosResponseDTO>> getActivesCarros() {
         return ResponseEntity.ok(carrosService.findActiveAndDisponible());
     }
 
